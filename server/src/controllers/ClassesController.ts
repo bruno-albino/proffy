@@ -47,7 +47,7 @@ export default class ClassesController {
             schedule
         } = req.body
     
-        const trx = await db.transaction()
+        const trx = await db.transaction()  
     
         try {
             const insertedUsersIds = await trx('users').insert({
@@ -82,6 +82,7 @@ export default class ClassesController {
             res.status(201).send()
         } catch(err) {
             await trx.rollback()
+            console.log(err)
             return res.status(400).json({
                 error: 'Unexpected error while creatin new class'
             })
